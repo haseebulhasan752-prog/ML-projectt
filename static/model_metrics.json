@@ -1,0 +1,170 @@
+{
+  "CGPA": [
+    {
+      "model": "Linear Regression",
+      "MAE": 0.0,
+      "MSE": 0.0,
+      "RMSE": 0.0,
+      "R2": 1.0,
+      "Train_R2": 1.0,
+      "CV_R2": 1.0
+    },
+    {
+      "model": "Ridge Regression",
+      "MAE": 0.0003,
+      "MSE": 0.0,
+      "RMSE": 0.0003,
+      "R2": 1.0,
+      "Train_R2": 1.0
+    },
+    {
+      "model": "Lasso Regression",
+      "MAE": 0.0083,
+      "MSE": 0.0001,
+      "RMSE": 0.0101,
+      "R2": 0.9988
+    },
+    {
+      "model": "ElasticNet",
+      "MAE": 0.0049,
+      "MSE": 0.0001,
+      "RMSE": 0.0086,
+      "R2": 0.9991
+    },
+    {
+      "model": "KNN (k=11)",
+      "MAE": 0.0958,
+      "MSE": 0.0161,
+      "RMSE": 0.1268,
+      "R2": 0.8062,
+      "Train_R2": 1.0,
+      "CV_R2": 0.8007
+    }
+  ],
+  "Stress_Level": [
+    {
+      "model": "Linear Regression",
+      "MAE": 0.0823,
+      "MSE": 0.0118,
+      "RMSE": 0.1086,
+      "R2": 0.9956,
+      "Train_R2": 0.9958,
+      "CV_R2": 0.9957
+    },
+    {
+      "model": "Ridge Regression",
+      "MAE": 0.0818,
+      "MSE": 0.0118,
+      "RMSE": 0.1086,
+      "R2": 0.9956,
+      "Train_R2": 0.9958
+    },
+    {
+      "model": "Lasso Regression",
+      "MAE": 0.094,
+      "MSE": 0.017,
+      "RMSE": 0.1302,
+      "R2": 0.9937
+    },
+    {
+      "model": "ElasticNet",
+      "MAE": 0.0905,
+      "MSE": 0.0158,
+      "RMSE": 0.1256,
+      "R2": 0.9942
+    },
+    {
+      "model": "KNN (k=11)",
+      "MAE": 0.4982,
+      "MSE": 0.3763,
+      "RMSE": 0.6134,
+      "R2": 0.8609,
+      "Train_R2": 1.0,
+      "CV_R2": 0.8504
+    }
+  ],
+  "Depression_Score": [
+    {
+      "model": "Linear Regression",
+      "MAE": 0.4169,
+      "MSE": 0.3047,
+      "RMSE": 0.552,
+      "R2": 0.8849,
+      "Train_R2": 0.8899,
+      "CV_R2": 0.8881
+    },
+    {
+      "model": "Ridge Regression",
+      "MAE": 0.4164,
+      "MSE": 0.305,
+      "RMSE": 0.5522,
+      "R2": 0.8848,
+      "Train_R2": 0.8898
+    },
+    {
+      "model": "Lasso Regression",
+      "MAE": 0.4114,
+      "MSE": 0.3066,
+      "RMSE": 0.5537,
+      "R2": 0.8842
+    },
+    {
+      "model": "ElasticNet",
+      "MAE": 0.4132,
+      "MSE": 0.3068,
+      "RMSE": 0.5539,
+      "R2": 0.8841
+    },
+    {
+      "model": "KNN (k=12)",
+      "MAE": 0.7956,
+      "MSE": 0.9571,
+      "RMSE": 0.9783,
+      "R2": 0.6384,
+      "Train_R2": 1.0,
+      "CV_R2": 0.6258
+    }
+  ],
+  "Anxiety_Score": [
+    {
+      "model": "Linear Regression",
+      "MAE": 0.5978,
+      "MSE": 0.6076,
+      "RMSE": 0.7795,
+      "R2": 0.7765,
+      "Train_R2": 0.7912,
+      "CV_R2": 0.789
+    },
+    {
+      "model": "Ridge Regression",
+      "MAE": 0.598,
+      "MSE": 0.6078,
+      "RMSE": 0.7796,
+      "R2": 0.7764,
+      "Train_R2": 0.7912
+    },
+    {
+      "model": "Lasso Regression",
+      "MAE": 0.5992,
+      "MSE": 0.613,
+      "RMSE": 0.7829,
+      "R2": 0.7745
+    },
+    {
+      "model": "ElasticNet",
+      "MAE": 0.5994,
+      "MSE": 0.611,
+      "RMSE": 0.7817,
+      "R2": 0.7752
+    },
+    {
+      "model": "KNN (k=20)",
+      "MAE": 0.8492,
+      "MSE": 1.0554,
+      "RMSE": 1.0273,
+      "R2": 0.6117,
+      "Train_R2": 1.0,
+      "CV_R2": 0.5906
+    }
+  ]
+}

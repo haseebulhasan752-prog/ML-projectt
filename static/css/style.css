@@ -1,0 +1,114 @@
+/* =====================================================================
+   Student Mental Health AI — Custom Stylesheet
+   ===================================================================== */
+
+:root {
+  --grad-start: #1a237e;
+  --grad-end:   #283593;
+  --accent:     #ffc107;
+}
+
+body {
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  background: #f8f9fa;
+}
+
+/* ── Navbar ─────────────────────────────────────────────────────────── */
+#mainNav {
+  background: linear-gradient(135deg, var(--grad-start), var(--grad-end));
+  box-shadow: 0 2px 12px rgba(0,0,0,0.25);
+}
+.navbar-brand { font-size: 1.3rem; letter-spacing: .5px; }
+.nav-link { font-weight: 500; letter-spacing: .3px; }
+.nav-link.active, .nav-link:hover { color: var(--accent) !important; }
+
+/* ── Hero ───────────────────────────────────────────────────────────── */
+.hero-section {
+  background: linear-gradient(135deg, #1a237e 0%, #283593 40%, #0d47a1 100%);
+  min-height: 420px;
+  display: flex;
+  align-items: center;
+}
+.hero-section h1 { text-shadow: 0 2px 8px rgba(0,0,0,0.3); }
+
+/* ── Stats strip ────────────────────────────────────────────────────── */
+.stats-strip { border-top: 3px solid var(--accent); }
+.stat-number { font-size: 2rem; }
+
+/* ── Page header (inner pages) ──────────────────────────────────────── */
+.page-header {
+  background: linear-gradient(135deg, #283593, #0d47a1);
+}
+
+/* ── Model cards ────────────────────────────────────────────────────── */
+.model-card {
+  border-radius: 16px !important;
+  transition: transform .25s, box-shadow .25s;
+}
+.model-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 32px rgba(0,0,0,0.12) !important;
+}
+.model-icon { opacity: .85; }
+
+/* ── Steps ──────────────────────────────────────────────────────────── */
+.step-card { border-radius: 16px; background: #fff; box-shadow: 0 2px 12px rgba(0,0,0,0.07); }
+.step-num {
+  width: 52px; height: 52px; border-radius: 50%;
+  background: linear-gradient(135deg, #1a237e, #0d47a1);
+  color: #fff; font-size: 1.5rem; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto;
+}
+
+/* ── Target cards ───────────────────────────────────────────────────── */
+.target-card { border-radius: 14px !important; transition: transform .2s; }
+.target-card:hover { transform: translateY(-4px); }
+
+/* ── Predict page ───────────────────────────────────────────────────── */
+.section-divider {
+  border-bottom: 2px solid #e9ecef;
+  padding-bottom: 8px;
+  color: #495057;
+  margin-top: 12px;
+}
+
+.target-btn {
+  border-radius: 12px !important;
+  font-weight: 600;
+  transition: all .2s;
+}
+.target-btn:hover { transform: scale(1.04); }
+.btn-check:checked + .target-btn {
+  box-shadow: 0 4px 16px rgba(0,0,0,0.18);
+  transform: scale(1.06);
+}
+
+.field-wrapper { transition: opacity .25s; }
+.field-wrapper.hidden-field { opacity: 0; pointer-events: none; height: 0; overflow: hidden; padding: 0 !important; margin: 0 !important; }
+
+/* ── Result page ────────────────────────────────────────────────────── */
+.result-hero-card {
+  border-radius: 20px !important;
+  background: linear-gradient(135deg, #fff 0%, #f0f4ff 100%);
+}
+.result-value { color: #1a237e; line-height: 1; }
+.input-summary-item { font-size: .78rem; }
+
+/* ── Dashboard ──────────────────────────────────────────────────────── */
+.metric-card { border-radius: 16px !important; }
+.metric-mini { font-size: .8rem; }
+
+/* ── Cards general ──────────────────────────────────────────────────── */
+.card { border-radius: 12px !important; }
+.card-header { font-weight: 600; }
+
+/* ── Buttons ────────────────────────────────────────────────────────── */
+.btn { border-radius: 10px !important; font-weight: 600; }
+.btn-lg { padding: .75rem 2rem; }
+
+/* ── Responsive ─────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .hero-section { min-height: auto; padding: 2.5rem 0; }
+  .hero-section h1 { font-size: 1.8rem; }
+}

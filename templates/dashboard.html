@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dashboard — Student Mental Health AI</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"/>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark sticky-top" id="mainNav">
+  <div class="container">
+    <a class="navbar-brand fw-bold" href="/"><i class="fas fa-brain me-2"></i>MentalHealth AI</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMenu">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="/predict">Predict</a></li>
+        <li class="nav-item"><a class="nav-link active" href="/dashboard">Dashboard</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="page-header text-white text-center py-4">
+  <div class="container">
+    <h2 class="fw-bold mb-1"><i class="fas fa-tachometer-alt me-2"></i>Analytics Dashboard</h2>
+    <p class="mb-0 opacity-75">Model performance, EDA visualizations and dataset insights</p>
+  </div>
+</div>
+
+<div class="container py-4">
+
+  <!-- Model Performance Cards -->
+  <h4 class="fw-bold mb-3"><i class="fas fa-trophy me-2 text-warning"></i>Best Model Performance per Target</h4>
+  <div class="row g-3 mb-5">
+    {% set color_map = {'CGPA':'primary','Stress_Level':'danger','Depression_Score':'info','Anxiety_Score':'warning'} %}
+    {% for target, m in metrics.items() %}
+    <div class="col-md-6 col-lg-3">
+      <div class="card border-0 shadow metric-card">
+        <div class="card-body text-center p-4">
+          <div class="badge bg-{{ color_map[target] }} mb-2 px-3 py-2">{{ target.replace('_',' ') }}</div>
+          <div class="fs-2 fw-bold text-{{ color_map[target] }}">{{ m.R2 }}</div>
+          <div class="text-muted small mb-2">R² Score</div>
+          <div class="row g-1 text-center">
+            <div class="col-6">
+              <div class="metric-mini bg-light rounded p-1">
+                <div class="small fw-bold">{{ m.MAE }}</div>
+                <div class="text-muted" style="font-size:0.65rem">MAE</div>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="metric-mini bg-light rounded p-1">
+                <div class="small fw-bold">{{ m.RMSE }}</div>
+                <div class="text-muted" style="font-size:0.65rem">RMSE</div>
+              </div>
+            </div>
+          </div>
+          <div class="mt-2 text-muted small">{{ m.model }}</div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
+  <!-- Overall R2 Chart -->
+  <div class="row g-4 mb-5">
+    <div class="col-12">
+      <div class="card border-0 shadow-sm">
+        <div class="card-header"><i class="fas fa-chart-bar me-2"></i>Overall R² Summary</div>
+        <div class="card-body p-2">
+          <img src="{{ url_for('static', filename='graphs/overall_r2_summary.png') }}"
+               class="img-fluid rounded" alt="Overall R2"/>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- All-Model Comparison per Target -->
+  <h4 class="fw-bold mb-3"><i class="fas fa-layer-group me-2"></i>Algorithm Comparison per Target</h4>
+  <div class="row g-4 mb-5">
+    {% for target in ['CGPA','Stress_Level','Depression_Score','Anxiety_Score'] %}
+    <div class="col-md-6">
+      <div class="card border-0 shadow-sm">
+        <div class="card-header">{{ target.replace('_',' ') }}</div>
+        <div class="card-body p-2">
+          <img src="{{ url_for('static', filename='graphs/model_comparison_' + target + '.png') }}"
+               class="img-fluid rounded" alt="Model Comparison {{ target }}"/>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
+  <!-- EDA Graphs -->
+  <h4 class="fw-bold mb-3"><i class="fas fa-chart-area me-2"></i>Exploratory Data Analysis</h4>
+  <div class="row g-4 mb-5">
+    {% for gname in ['target_distributions','correlation_heatmap','target_correlations',
+                     'boxplots','feature_histograms','cgpa_vs_stress',
+                     'gender_distribution'] %}
+    {% if gname + '.png' in graphs %}
+    <div class="col-md-6">
+      <div class="card border-0 shadow-sm">
+        <div class="card-header">{{ gname.replace('_',' ').title() }}</div>
+        <div class="card-body p-2">
+          <img src="{{ url_for('static', filename='graphs/' + gname + '.png') }}"
+               class="img-fluid rounded" alt="{{ gname }}"/>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+    {% endfor %}
+  </div>
+
+  <!-- All Metrics Table -->
+  <h4 class="fw-bold mb-3"><i class="fas fa-table me-2"></i>Detailed Metrics Table</h4>
+  {% for target, results in all_metrics.items() %}
+  <div class="card border-0 shadow-sm mb-4">
+    <div class="card-header fw-bold">{{ target.replace('_',' ') }}</div>
+    <div class="card-body p-0">
+      <div class="table-responsive">
+        <table class="table table-hover mb-0 text-center">
+          <thead class="table-dark">
+            <tr>
+              <th>Model</th><th>MAE</th><th>MSE</th><th>RMSE</th><th>R²</th>
+              <th>Train R²</th><th>CV R²</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for m in results %}
+            <tr class="{% if m.R2 == results|map(attribute='R2')|max %}table-success{% endif %}">
+              <td class="fw-semibold">{{ m.model }}</td>
+              <td>{{ m.MAE }}</td>
+              <td>{{ m.MSE }}</td>
+              <td>{{ m.RMSE }}</td>
+              <td><strong>{{ m.R2 }}</strong></td>
+              <td>{{ m.get('Train_R2', '—') }}</td>
+              <td>{{ m.get('CV_R2', '—') }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+
+</div>
+
+<footer class="bg-dark text-white py-3 text-center mt-4">
+  <p class="mb-0 text-muted small">Student Mental Health AI — Final Year ML Project</p>
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
